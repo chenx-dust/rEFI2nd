@@ -667,9 +667,10 @@ VOID ReadConfig(CHAR16 *FileName)
             HandleStrings(TokenList, TokenCount, &(GlobalConfig.DriverDirs));
 
         } else if (MyStriCmp(TokenList[0], L"showtools")) {
-            SetMem(GlobalConfig.ShowTools, NUM_TOOLS * sizeof(UINTN), 0);
+            MySetMem(GlobalConfig.ShowTools, NUM_TOOLS * sizeof(UINTN), 0);
             GlobalConfig.HiddenTags = FALSE;
-            for (i = 1; (i < TokenCount) && (i < NUM_TOOLS); i++) {
+            for (i = 1; (i < TokenCount) && (i <= NUM_TOOLS); i++) {
+                // i <= NUM_TOOLS because [i - 1] is used as the index to GlobalConfig.ShowTools
                 FlagName = TokenList[i];
                 if (MyStriCmp(FlagName, L"shell")) {
                     GlobalConfig.ShowTools[i - 1] = TAG_SHELL;

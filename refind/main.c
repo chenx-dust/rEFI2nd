@@ -151,9 +151,10 @@ REFIT_CONFIG GlobalConfig = { /* TextOnly = */ FALSE,
                               /* *ExtraKernelVersionStrings = */ NULL,
                               /* *SpoofOSXVersion = */ NULL,
                               /* CsrValues = */ NULL,
-                              /* ShowTools = */ { TAG_SHELL, TAG_MEMTEST, TAG_GDISK, TAG_APPLE_RECOVERY, TAG_WINDOWS_RECOVERY,
-                                                  TAG_MOK_TOOL, TAG_ABOUT, TAG_HIDDEN, TAG_SHUTDOWN, TAG_REBOOT, TAG_FIRMWARE,
-                                                  TAG_FWUPDATE_TOOL, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+                              /* ShowTools = */ { TAG_SHELL, TAG_MEMTEST, TAG_GDISK, TAG_APPLE_RECOVERY, TAG_WINDOWS_RECOVERY,  /*  5 */
+                                                  TAG_MOK_TOOL, TAG_ABOUT, TAG_HIDDEN, TAG_SHUTDOWN, TAG_REBOOT, TAG_FIRMWARE,  /*  6 */
+                                                  TAG_FWUPDATE_TOOL,                                                            /*  1 */
+                                                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }                                          /* 12 */
                             };
 
 CHAR16 *gHiddenTools = NULL;
