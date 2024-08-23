@@ -1,3 +1,22 @@
+rEFI2nd - rEFind 2nd version
+
+A fork with bug-fixes and optimizations.
+
+Differences from Original rEFInd
+================================================
+
+- Fixed bug in duplicated tools found caused by broken SetMem() on recent
+  GNU-EFI builds.
+
+- Add ConnectAllDriversToAllControllers() before ScanVolumes() for correctly
+  read filesystem label of non-boot volumes.
+
+- Replaced optimization flag -Os by -Ofast -mtune=native
+
+- Made black as default background color.
+
+- Added several logger for better debugging.
+
 Brief Installation Instructions (Binary Package)
 ================================================
 
