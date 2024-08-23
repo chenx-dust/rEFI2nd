@@ -496,6 +496,7 @@ efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
     // and ReadConfig(); however, if drivers are loaded, a second call to
     // ScanVolumes() is needed to register the new filesystem(s) accessed
     // by the drivers.
+    ConnectAllDriversToAllControllers();
     ScanVolumes();
     ReadConfig(GlobalConfig.ConfigFilename);
     if (GlobalConfig.LogLevel > 0) {
@@ -526,10 +527,6 @@ efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
     SetVolumeIcons();
     ScanForBootloaders(FALSE);
     ScanForTools();
-
-    // SetupScreen() clears the screen; but ScanForBootloaders() may display a
-    // message that must be deleted, so do so
-    BltClearScreen(TRUE);
     pdInitialize();
 
     if (GlobalConfig.ScanDelay > 0) {
