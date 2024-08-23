@@ -23,6 +23,7 @@
 #include "global.h"
 #include "screen.h"
 #include "icns.h"
+#include "log.h"
 #include "../include/refit_call_wrapper.h"
 #include "../refind/lib.h"
 
@@ -48,6 +49,8 @@ POINTER_STATE State;
 // Initialize all pointer devices
 ////////////////////////////////////////////////////////////////////////////////
 VOID pdInitialize() {
+    LOG(1, LOG_LINE_NORMAL, L"Initializing pointer device...");
+
     pdCleanup(); // just in case
 
     if (!(GlobalConfig.EnableMouse || GlobalConfig.EnableTouch)) return;
