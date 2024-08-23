@@ -620,7 +620,7 @@ static VOID SetFilesystemName(REFIT_VOLUME *Volume) {
 
     if ((Volume) && (Volume->RootDir != NULL)) {
         FileSystemInfoPtr = LibFileSystemInfo(Volume->RootDir);
-     }
+    }
 
     if ((FileSystemInfoPtr != NULL) &&
         (StrLen(FileSystemInfoPtr->VolumeLabel) > 0)) {
@@ -1881,12 +1881,17 @@ BOOLEAN FindVolume(REFIT_VOLUME **Volume, CHAR16 *Identifier) {
 BOOLEAN VolumeMatchesDescription(REFIT_VOLUME *Volume, CHAR16 *Description) {
     EFI_GUID TargetVolGuid = NULL_GUID_VALUE;
 
-    if ((Volume == NULL) || (Description == NULL))
+    if ((Volume == NULL) || (Description == NULL)) {
+        LOG(4, LOG_LINE_NORMAL, L"VolumeMatchesDescription: Volume or Description is NULL");
         return FALSE;
+    }
     if (IsGuid(Description)) {
+        LOG(4, LOG_LINE_NORMAL, L"VolumeMatchesDescription: '%s' is GUID", Description);
         TargetVolGuid = StringAsGuid(Description);
         return GuidsAreEqual(&TargetVolGuid, &(Volume->PartGuid));
     } else {
+        LOG(4, LOG_LINE_NORMAL, L"VolumeMatchesDescription: '%s' matching with '%s', '%s', '%s'",
+            Description, Volume->VolName, Volume->PartName, Volume->FsName);
         return (MyStriCmp(Description, Volume->VolName) ||
                 MyStriCmp(Description, Volume->PartName) ||
                 MyStriCmp(Description, Volume->FsName));

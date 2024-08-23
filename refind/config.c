@@ -982,6 +982,7 @@ static LOADER_ENTRY * AddStanzaEntries(REFIT_FILE *File, REFIT_VOLUME *Volume, C
             DefaultsSet = TRUE;
 
         } else if (MyStriCmp(TokenList[0], L"volume") && (TokenCount > 1)) {
+            LOG(3, LOG_LINE_NORMAL, L"Matching volume identifier '%s'", TokenList[1]);
             PreviousVolume = CurrentVolume;
             if (FindVolume(&CurrentVolume, TokenList[1])) {
                 if ((CurrentVolume != NULL) && (CurrentVolume->IsReadable) && (CurrentVolume->RootDir)) {
@@ -993,8 +994,12 @@ static LOADER_ENTRY * AddStanzaEntries(REFIT_FILE *File, REFIT_VOLUME *Volume, C
                     Entry->Volume          = CurrentVolume;
                 } else { // It won't work out; reset to previous working volume....
                     CurrentVolume = PreviousVolume;
+                    LOG(1, LOG_LINE_NORMAL, L"Volume identifier '%s' matched, but won't work out", TokenList[1]);
                 } // if/else volume is readable
             } // if match found
+            else {
+                LOG(1, LOG_LINE_NORMAL, L"Failed to match volume identifier '%s'", TokenList[1]);
+            }
 
         } else if (MyStriCmp(TokenList[0], L"icon") && (TokenCount > 1)) {
             MyFreePool(Entry->me.Image);
