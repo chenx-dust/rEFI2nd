@@ -482,7 +482,8 @@ VOID BltClearScreen(BOOLEAN ShowBanner)
 
     } else { // not showing banner
         // clear to menu background color
-        egClearScreen(&MenuBackgroundPixel);
+        // customized to dark background color
+        egClearScreen(&DarkBackgroundPixel);
     }
 
     GraphicsScreenDirty = FALSE;
